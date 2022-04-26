@@ -10,6 +10,7 @@ def load_function():
         print(products)
     except Exception as error_message:
         print(error_message)
+
 def store_function(list_data):
     try:
         with open('product.csv','w',encoding='utf-8') as file:
@@ -20,6 +21,7 @@ def store_function(list_data):
                 file.write(product[0] + ',' + product[1]+'\n')
     except Exception as error_message:
         print(error_message)
+
 def main():
     load_function()
     while True:
@@ -33,6 +35,7 @@ def main():
             break
         price = input('請輸入商品價格:')
         products.append([product, price])
+        
 if __name__ == '__main__':
     main()
 
