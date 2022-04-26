@@ -1,7 +1,7 @@
 products = []
 def save_function(products_data):
     try:
-        with open("product.csv","w") as file:
+        with open("product.csv","w",encoding='utf-8') as file:
             file.write("商品,價格\n")
             for product in products_data:
                 str = product[0] + "," + product[1] + "\n"
