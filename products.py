@@ -4,6 +4,8 @@ def load_function():
     try:
         with open('product.csv', 'r', encoding='utf-8') as file:
             for line in file:
+                if '商品,價格' in line:
+                    continue #繼續
                 name, price = line.strip().split(',') #1.先用strip把讀到的資料\n刪掉2.再用split(',')把資料依照','分隔
                                                       # 3.把分隔後的資料分別存到name跟price裡
                 products.append([name,price])
@@ -14,9 +16,7 @@ def load_function():
 def store_function(list_data):
     try:
         with open('product.csv','w',encoding='utf-8') as file:
-            if '商品' not in list_data[0]:
-                file.write('商品' + ',' + '價格'+'\n')
-                print('write 商品')
+            file.write('商品' + ',' + '價格'+'\n')
             for product in list_data:
                 file.write(product[0] + ',' + product[1]+'\n')
     except Exception as error_message:
@@ -35,7 +35,6 @@ def main():
             break
         price = input('請輸入商品價格:')
         products.append([product, price])
-        
 if __name__ == '__main__':
     main()
 
