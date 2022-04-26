@@ -3,7 +3,7 @@ def save_function(products_data):
     try:
         with open("product.txt","w") as file:
             for product in products_data:
-                str = "商品："+product[0] + ",價格：" + product[1] + "\n"
+                str = product[0] + "," + product[1] + "\n"
                 file.write(str)
     except Exception as error_message:
         print(error_message)
