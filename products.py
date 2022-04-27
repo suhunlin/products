@@ -1,43 +1,44 @@
 
-products = []
-def load_function():
+def sorte_product(product_list):
     try:
-        with open('product.csv', 'r', encoding='utf-8') as file:
-            for line in file:
-                if '商品,價格' in line:
-                    continue #繼續
-                name, price = line.strip().split(',') #1.先用strip把讀到的資料\n刪掉2.再用split(',')把資料依照','分隔
-                                                      # 3.把分隔後的資料分別存到name跟price裡
-                products.append([name,price])
-        print(products)
+        with open('products.csv','w',encoding='utf-8') as file:
+            file.write('產品'+','+'價格'+'\n')
+            for product in product_list:
+                file.write(product[0]+','+product[1]+'\n')
+
     except Exception as error_message:
         print(error_message)
 
-def store_function(list_data):
+def load_product():
+    products = []
     try:
-        with open('product.csv','w',encoding='utf-8') as file:
-            file.write('商品' + ',' + '價格'+'\n')
-            for product in list_data:
-                file.write(product[0] + ',' + product[1]+'\n')
+        with open('products.csv','r',encoding='utf-8') as file:
+            for line in file:
+                if '產品,價格' in line:
+                    continue
+                name,price = line.strip().split(',')
+                products.append([name,price])
     except Exception as error_message:
         print(error_message)
+    return products
+
+def user_input_product(product_list):
+    products = product_list
+    while True:
+        name = input('請輸入產品名稱(結束輸入q):')
+        if name == 'q':
+            if not products:
+                print('No product data!!!')
+            else:
+                sorte_product(products)
+            break
+        price = input('請輸入產品價格：')
+        products.append([name,price])
 
 def main():
-    load_function()
-    while True:
-        product = input('請輸入商品名稱(結束請輸入q):')
-        if product == 'q':
-            if not products:  # 如果products list裡面是空清單的話
-                print('空清單，離開!!!')
-                break
-            else:
-                store_function(products)
-            break
-        price = input('請輸入商品價格:')
-        products.append([product, price])
+    products = load_product()
+    print(products)
+    user_input_product(products)
+
 if __name__ == '__main__':
     main()
-
-
-
-
