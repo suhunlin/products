@@ -23,7 +23,11 @@ def load_product(filename):
 
 def store_prodect(products,filename):
     result = False
-    if not products or not filename:
+    if not products:
+        print('No products!!!')
+        return result
+    elif not filename:
+        print('No filename!!!')
         return result
     try:
         with open(filename,'w',encoding='utf-8') as file:
@@ -39,9 +43,7 @@ def print_product_info(products):
     if not products:
         print('沒有任何產品資訊!!!')
     for product in products:
-        if '商品,價格' in product:
-            continue
-        print(product)
+        print(product[0],',',product[1])
 
 def main():
     filename = 'products.csv'
@@ -51,7 +53,10 @@ def main():
         products = []
     products = user_input(products)
     print_product_info(products)
-    store_prodect(products, filename)
+    if store_prodect(products, filename):
+        print('save file success!!!')
+    else:
+        print('save file false!!!')
 
 if __name__ == '__main__':
     main()
